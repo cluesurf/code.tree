@@ -1,5 +1,5 @@
 
-deck @termsurf/code
+deck @cluesurf/code
   head <The BaseNote Content Grammar Library>
   term <information>
   term <computation>

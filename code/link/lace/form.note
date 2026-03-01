@@ -1,14 +1,14 @@
 
-load @termsurf/seed/code/form/bind
+load @cluesurf/seed/code/form/bind
   take form bind
 
-load @termsurf/seed/code/form/link
+load @cluesurf/seed/code/form/link
   take form link
 
-load @termsurf/seed/code/form/test
+load @cluesurf/seed/code/form/test
   take form test
 
-load @termsurf/seed/code/form/walk
+load @cluesurf/seed/code/form/walk
   take form walk
 
 wear lace-flow
