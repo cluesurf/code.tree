@@ -1,6 +1,6 @@
 
 deck @cluesurf/code
-  head <The BaseNote Content Grammar Library>
+  head <The Seed Content Grammar Library>
   term <information>
   term <computation>
   term <library>
