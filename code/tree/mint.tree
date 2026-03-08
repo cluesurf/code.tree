@@ -1,0 +1,85 @@
+
+load ./form
+  find tree-document
+  find tree-block
+  find tree-inline
+  find tree-string
+  find tree-number
+  find tree-text
+  find tree-interpolation
+
+mint tree, like tree-document
+  case indented-term, mint indented-term
+    slot list
+  hook make
+    make tree-document
+      bind list, read list
+
+mint indented-term, like tree-block
+  case name
+    slot text
+  case inline-input, mint inline-input
+    slot list
+  case nested-input, mint nested-input
+    slot list
+  hook make
+    make tree-block
+      bind text, read text
+      bind list, read list
+
+mint inline-input, like tree-inline
+  case inline-parenthesized-input, mint inline-value
+    slot list
+  case inline-non-parenthesized-input, mint inline-value
+    slot list
+  hook make
+    make tree-inline
+      bind list, read list
+
+mint inline-value, like tree-block
+  case number
+    slot value
+  case code
+    slot value
+  case inline-template, mint template-line
+    slot value
+  case path
+    slot value
+  case selector
+    slot value
+  case inline-term, mint indented-term
+    slot value
+  hook make
+    make tree-block
+      bind list, read value
+
+mint template-line, like tree-text
+  case inline-string, mint inline-string
+    slot list
+  case inline-code, mint inline-code
+    slot list
+  hook make
+    make tree-text
+      bind list, read list
+
+mint inline-string, like tree-string
+  hook make
+    make tree-string
+
+mint inline-code, like tree-interpolation
+  case name
+    slot name
+  case inline-parenthesized-input, mint inline-value
+    slot link
+  hook make
+    make tree-interpolation
+      bind link, read link
+
+mint nested-input, like tree-block
+  case nested-template, mint template-line
+    slot value
+  case indented-term, mint indented-term
+    slot value
+  hook make
+    make tree-block
+      bind list, read value

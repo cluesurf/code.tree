@@ -1,15 +1,15 @@
 
 mine carriage-return
-  mine text, text 13
+  mine text 13
 
 mine line-feed
-  mine text, text 10
+  mine text 10
 
 mine space
-  mine text, text 32
+  mine text 32
 
 mine horizontal-tab
-  mine text, text 9
+  mine text 9
 
 mine carriage-return-line-feed
   mine carriage-return

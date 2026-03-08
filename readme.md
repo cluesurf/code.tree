@@ -8,7 +8,7 @@
 
 <h3 align='center'>code.tree</h3>
 <p align='center'>
-  The TermTree Content Grammar Library
+  The Seed Content Grammar Library
 </p>
 
 <br/>

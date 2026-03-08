@@ -1,8 +1,8 @@
 
 mine instruction
-  mine room, mine form, form legacy-prefix
+  mine maybe, mine form, form legacy-prefix
   mine form, form opcode
-  mine room, mine form, form suffix
+  mine maybe, mine form, form suffix
 
 mine suffix
   mine form, form mod-memory-register-byte
@@ -52,10 +52,10 @@ mine opcode-3
   mine binary, #h7B
 
 mine legacy-prefix
-  mine room, mine form, form instruction-prefix
-  mine room, mine form, form address-size-prefix
-  mine room, mine form, form operand-size-prefix
-  mine room, mine form, form segment-override-prefix
+  mine maybe, mine form, form instruction-prefix
+  mine maybe, mine form, form address-size-prefix
+  mine maybe, mine form, form operand-size-prefix
+  mine maybe, mine form, form segment-override-prefix
 
 mine instruction-prefix
   mine binary, #hF3

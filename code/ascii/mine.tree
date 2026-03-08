@@ -1,5 +1,5 @@
 
 mine ascii
-  mine band
+  mine range
     bind base, text 0
     bind head, text 127

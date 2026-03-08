@@ -5,6 +5,6 @@ mine octet
     mine block
 
 mine char
-  mine band
+  mine range
     bind base, share 0
     bind head, share 127

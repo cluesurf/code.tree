@@ -1,13 +1,13 @@
 
 mine digit
-  mine bind
-    bind base, text <0>
-    bind head, text <9>
+  mine range
+    bind start, <0>
+    bind end, <9>
 
 mine non-zero-digit
-  mine bind
-    bind base, text <1>
-    bind head, text <9>
+  mine range
+    bind start, <1>
+    bind end, <9>
 
 mine digit-list
   mine list
@@ -22,15 +22,15 @@ mine signed-integer
     mine form, form non-zero-digit
 
 mine integer
-  mine room
+  mine maybe
     mine form, form minus
   mine list
     mine form, form non-zero-digit
 
 mine minus
-  mine text, text <->
+  mine <->
 
 mine number
-  mine head
+  mine any
     mine form, form decimal
     mine form, form integer

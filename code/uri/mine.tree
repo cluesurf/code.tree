@@ -1,36 +1,36 @@
 
 mine uri
   mine form, form scheme
-  mine text, text <:>
-  mine head
+  mine <:>
+  look after
     mine form, form authority
     mine form, form absolute-path
     mine form, form relative-path
   mine form, form path
-  mine room
-    mine text, text <?>
+  mine maybe
+    mine <?>
     mine form, form query
-  mine room
-    mine text, text <#>
+  mine maybe
+    mine <#>
     mine form, form fragment
 
 mine scheme
   mine form, form alpha
   mine list
-    mine head
+    look after
       mine form, form alpha
       mine form, form digit
-      mine text, text <+>
-      mine text, text <->
-      mine text, text <.>
+      mine <+>
+      mine <->
+      mine <.>
 
 mine authority
-  mine room
+  mine maybe
     mine form, form login
-    mine text, text <@>
+    mine <@>
   mine form, form host
-  mine room
-    mine text, text <:>
+  mine maybe
+    mine <:>
     mine form, form port
 
 mine host
@@ -39,52 +39,52 @@ mine host
   mine form, form reg-name
 
 mine ip-literal
-  mine text, text <[>
-  mine room
-    mine head
+  mine <[>
+  mine maybe
+    look after
       mine form, form ipv6-address
       mine form, form ipv-future
-  mine text, text <]>
+  mine <]>
 
 mine abs_path
   mine form, form "/"  path-segment-list
 
 mine path
-  mine text, text </>
-  mine room
+  mine </>
+  mine maybe
     mine form, form segment
-    mine list
-      mine text, text </>
+    mine flow
+      mine </>
       mine form, form segment
 
 mine segment
   mine list
     mine form, form pchar
-  mine list
-    mine text, text <;>
+  mine flow
+    mine <;>
     mine list
       mine form, form pchar
 
 mine pchar
-  mine head
+  look after
     mine form, form unreserved-symbol
     mine form, form escaped
-    mine text, text <:>
-    mine text, text <@>
-    mine text, text <&>
-    mine text, text <=>
-    mine text, text <+>
-    mine text, text <$>
-    mine text, text <,>
+    mine <:>
+    mine <@>
+    mine <&>
+    mine <=>
+    mine <+>
+    mine <$>
+    mine <,>
 
 mine uri-reference
-  mine head
+  look after
     mine form, form uri
     mine form, form relative-ref
 
 mine absolute-uri
   mine form, form scheme
-  mine text, text <:>
+  mine <:>
   mine form, form absolute-path
 
 mine scheme
@@ -92,11 +92,11 @@ mine scheme
 
 mine login
   mine list
-    mine head
+    look after
       mine form, form unreserved-symbol
       mine form, form pct-encoded
       mine form, form sub-delimiters
-      mine text, text <:>
+      mine <:>
 
 mine host
   mine form, form IP-literal / IPv4address / reg-name
@@ -139,7 +139,7 @@ mine dec-octet
 
 mine name
   mine list
-    mine head
+    look after
       mine form, form unreserved-symbol
       mine form, form pct-encoded
       mine form, form sub-delimiters
@@ -149,22 +149,22 @@ mine query
 
 mine fragment
   mine list
-    mine head
+    look after
       mine form, form pchar
-      mine text, text </>
-      mine text, text <?>
+      mine </>
+      mine <?>
 
 mine pct-encoded
   mine form, form "%" HEXDIG HEXDIG
 
 mine unreserved-symbol
-  mine head
+  look after
     mine form, form alphabet
     mine form, form digit
-    mine text, text <->
-    mine text, text <.>
-    mine text, text <_>
-    mine text, text <~>
+    mine <->
+    mine <.>
+    mine <_>
+    mine <~>
 
 mine reserved
   mine form, form gen-delimiters / sub-delimiters
@@ -172,15 +172,15 @@ mine gen-delimiters
   mine form, form ":" / "/" / "?" / "#" / "[" / "]" / "@"
 
 mine sub-delimiters
-  mine head
-    mine text, text <!>
-    mine text, text <$>
-    mine text, text <&>
-    mine text, text <'>
-    mine text, text <(>
-    mine text, text <)>
-    mine text, text <*>
-    mine text, text <+>
-    mine text, text <,>
-    mine text, text <;>
-    mine text, text <=>
+  look after
+    mine <!>
+    mine <$>
+    mine <&>
+    mine <'>
+    mine <(>
+    mine <)>
+    mine <*>
+    mine <+>
+    mine <,>
+    mine <;>
+    mine <=>
