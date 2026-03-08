@@ -6,22 +6,11 @@ form tree-block
   link text, like text
   link list, list tree-node
 
-form tree-inline
+form tree-text
   link list, list tree-node
 
 form tree-string
   link text, like text
-
-form tree-number
-  link text, like text
-  link bond, like i64
-
-form tree-text
-  link list, list tree-node
-
-form tree-interpolation
-  link size, like i32
-  link link, like tree-block
 
 form tree-span
   link base, like tree-position

@@ -5,6 +5,7 @@ mine tree
       mine form, form indented-term
         bind indent, 0
         take indented-term
+      mine form, form comment
       mine form, form line-break
 
 mine indented-term
@@ -18,55 +19,72 @@ mine indented-term
 
   mine maybe
     mine form, form inline-input
-      take inline-input
 
   save nested-indent
     call add
       read indent
-      2
+      1
 
   mine maybe
     mine list
-      mine form, form nested-input
-        bind indent, read nested-indent
-        take nested-input
+      mine flow
+        mine form, form line-break
+        mine form, form indented-term
+          bind indent, read nested-indent
+          take nested-child
 
 mine inline-input
   mine any
     mine form, form inline-parenthesized-input
-      take inline-parenthesized-input
     mine form, form inline-non-parenthesized-input
-      take inline-non-parenthesized-input
 
 mine inline-non-parenthesized-input
   mine form, form space
   mine form, form inline-value
-    take inline-value
   mine maybe
-    mine flow
-      mine form, form comma
-      mine form, form space
-      mine form, form inline-value
-        take inline-value
+    mine list
+      mine flow
+        mine form, form comma
+        mine form, form space
+        mine form, form inline-value
 
 mine inline-parenthesized-input
   mine form, form open-parenthesis
   mine form, form inline-value
-    take inline-value
   mine maybe
-    mine flow
-      mine form, form comma
-      mine form, form space
-      mine form, form inline-value
-        take inline-value
+    mine list
+      mine flow
+        mine form, form comma
+        mine form, form space
+        mine form, form inline-value
   mine form, form close-parenthesis
+
+mine inline-value
+  mine any
+    mine form, form inline-template
+      take inline-template
+    mine form, form code
+      take code
+    mine form, form number
+      take number
+    mine form, form path
+      take path
+    mine form, form inline-term
+      take inline-term
+
+mine inline-term
+  mine form, form name
+    take name
+  mine maybe
+    mine form, form inline-input
 
 mine name
   mine form, form prefix-word
   mine maybe
-    mine flow
-      mine form, form dash
-      mine form, form suffix-word
+    mine list
+      mine flow
+        mine form, form dash
+        mine form, form suffix-word
 
 mine prefix-word
   mine form, form lowercase-alphabet-letter
@@ -75,6 +93,7 @@ mine prefix-word
 
 mine suffix-word
   mine list
+    bind minimum, 1
     mine form, form word-symbol
 
 mine word-symbol
@@ -82,38 +101,10 @@ mine word-symbol
     mine form, form lowercase-alphabet-letter
     mine form, form digit
 
-mine inline-value
-  mine any
-    mine form, form inline-term
-      take inline-term
-    mine form, form inline-template
-      take inline-template
-    mine form, form number
-      take number
-    mine form, form code
-      take code
-    mine form, form path
-      take path
-    mine form, form selector
-      take selector
-
-mine inline-term
-  mine form, form name
-    take name
-  mine maybe
-    mine form, form inline-input
-      take inline-input
-
 mine inline-template
-  mine form, form opening-angle
+  mine <\<>
   mine form, form template-line
     take template-line
-  mine form, form closing-angle
-
-mine opening-angle
-  mine <\<>
-
-mine closing-angle
   mine <\>>
 
 mine template-line
@@ -128,81 +119,58 @@ mine inline-string
   mine list
     bind minimum, 1
     mine any
-      mine form, form escaped-closing-angle
-      mine form, form non-closing-angle
-
-mine escaped-closing-angle
-  mine form, form backslash
-  mine form, form closing-angle
-
-mine non-closing-angle
-  mine not
-    mine form, form closing-angle
+      mine flow
+        mine <\\>
+        mine <\>>
+      mine not
+        mine any
+          mine <\>>
+          mine <:>
 
 mine inline-code
-  mine form, form colon
+  mine <:>
   mine any
     mine form, form name
       take name
     mine form, form inline-parenthesized-input
-      take inline-parenthesized-input
 
-mine nested-input
-  take indent, like i32
-
-  mine any
-    mine form, form nested-template
-      bind indent, read indent
-      take nested-template
-    mine form, form indented-term
-      bind indent, read indent
-      take indented-term
-
-mine nested-template
-  take indent, like i32
-
-  save vertical-line-indent
-    call add
-      bind a, read indent
-      bind b, 2
-  save template-body-indent
-    call add
-      bind a, read indent
-      bind b, 4
-
-  mine form, form vertical-line
-    bind indent, read vertical-line-indent
-  mine form, form line-break
-  mine form, form multiline-template-body
-    bind indent, read template-body-indent
-  mine form, form line-break
-  mine form, form vertical-line
-    bind indent, read vertical-line-indent
-
-mine multiline-template-body
-  take indent, like i32
-
-  mine form, form indent
-    bind abind, read indent
-  mine form, form template-line
-    take template-line
+mine number
+  mine maybe
+    mine <->
+  mine list
+    bind minimum, 1
+    mine form, form digit
   mine maybe
     mine flow
-      mine form, form line-break
-      mine form, form indent
-        bind abind, read indent
-      mine form, form template-line
-        take template-line
+      mine <.>
+      mine list
+        bind minimum, 1
+        mine form, form digit
 
 mine code
   mine <#>
   mine form, form lowercase-alphabet-letter
-    take type
   mine list
+    bind minimum, 1
     mine form, form word-symbol
 
-mine colon
-  mine <:>
+mine path
+  mine any
+    mine <./>
+    mine <@>
+  mine list
+    mine any
+      mine form, form word-symbol
+      mine </>
+      mine <->
+      mine <.>
+
+mine comment
+  mine <#>
+  mine < >
+  mine list
+    mine not
+      mine form, form line-break
 
 mine line-break
   mine #u000A
@@ -212,9 +180,6 @@ mine space
 
 mine comma
   mine <,>
-
-mine backslash
-  mine <\\>
 
 mine open-parenthesis
   mine <(>
@@ -239,9 +204,3 @@ mine indent
     mine flow
       mine < >
       mine < >
-
-mine vertical-line
-  take indent, like i32
-  mine form, form indent
-    bind abind, read indent
-  mine <|>
