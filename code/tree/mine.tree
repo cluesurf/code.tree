@@ -148,7 +148,7 @@ mine number
         mine form, form digit
 
 mine code
-  mine <#>
+  mine <0>
   mine form, form lowercase-alphabet-letter
   mine list
     bind minimum, 1
