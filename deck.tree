@@ -1,5 +1,5 @@
 
-deck @cluesurf/code
+deck @term/code
   head <The Seed Content Grammar Library>
   term <information>
   term <computation>

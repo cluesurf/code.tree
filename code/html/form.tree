@@ -1,5 +1,5 @@
 
-mount @cluesurf/fish/field
+mount @term/fish/field
 
 class document
   field header

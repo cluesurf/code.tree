@@ -1,5 +1,5 @@
 
-fetch @cluesurf/tree/code/latin/number
+fetch @term/tree/code/latin/number
   catch mine digit
 
 mine hex
