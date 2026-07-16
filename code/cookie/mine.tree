@@ -10,13 +10,13 @@ mine obs-fold
 mine set-cookie-string
   mine form, form cookie-pair
   mine flow
-    mine text, write <;>
+    mine text, text <;>
     mine form, form SP
     mine form, form cookie-av
 
 mine cookie-pair
   mine form, form cookie-name
-  mine text, write <=>
+  mine text, text <=>
   mine form, form cookie-value
 
 mine cookie-name
@@ -92,7 +92,7 @@ mine cookie-av
 
 mine expires-av
   mine chunk, share <Expires=>
-    bind sense, write false
+    bind sense, text false
   mine form, form sane-cookie-date
 
 mine sane-cookie-date
@@ -100,7 +100,7 @@ mine sane-cookie-date
 
 mine max-age-av
   mine chunk, share <Max-Age=>
-    bind sense, write false
+    bind sense, text false
   mine form, form non-zero-digit
   mine list
     mine form, form DIGIT
@@ -112,7 +112,7 @@ mine non-zero-digit
 
 mine domain-av
   mine chunk, share <Domain=>
-    bind sense, write false
+    bind sense, text false
   mine form, form domain-value
 
 mine domain-value
@@ -166,7 +166,7 @@ mine digit
 
 mine path-av
   mine chunk, share <Path=>
-    bind sense, write false
+    bind sense, text false
   mine form, form path-value
 
 mine path-value
@@ -183,11 +183,11 @@ mine char
 
 mine secure-av
   mine chunk, share <Secure>
-    bind sense, write false
+    bind sense, text false
 
 mine httponly-av
   mine chunk, share <HttpOnly>
-    bind sense, write false
+    bind sense, text false
 
 mine extension-av
   mine form, form char
@@ -198,7 +198,7 @@ mine extension-av
 
 mine cookie-header
   mine form, share <Cookie:>
-    bind sense, write false
+    bind sense, text false
   mine form, form OWS
   mine form, form cookie-string
   mine form, form OWS
